@@ -31,7 +31,7 @@ Go in command line to the build folder created during building and launch TDL204
 I've followed the guidelines of https://pytorch.org/cppdocs/installing.html#minimal-example in order to install the torch dependency, and if you are on windows, maybe you need to change little things according to this tutorial.
 
 ## Results
-So I was able to reproduce the results of the paper, my training time was about 12 hours, when training time of paper was around 3 hours. So there is need for optimization. If you have ideas, don't hesitate to share them with me in the issues/comments.
+So I was able to reproduce the results of the paper, my training time was about 12 hours, when training time of paper was around 2 hours. So there is need for optimization. If you have ideas, don't hesitate to share them with me in the issues/comments.
 
 ## Load weights in python
 When training is done, a file called "TDL2048_weights.zip" is created in the build folder. It countains the trained weights in a format readable by torch in python. If you wish to read them in Python, just use :
