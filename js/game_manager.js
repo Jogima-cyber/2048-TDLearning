@@ -19,7 +19,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   
   var slider = document.getElementById("speedSlider");
 
-  this.speed = slider.value;
+  this.speed = parseInt(slider.value);
   var that = this;
   slider.oninput = function() {
     that.speed = parseInt(this.value);
