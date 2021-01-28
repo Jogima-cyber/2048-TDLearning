@@ -49,7 +49,6 @@ async function start_agent(game_manager){
     }
     
     game_manager.move(action_selected)
-    console.log(game_manager.grid.serialize_for_agent())
     await sleep(game_manager.get_speed());
   }
 }
