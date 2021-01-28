@@ -4,7 +4,6 @@ function Agent(weights) {
 
 Agent.prototype.select_move = function (board) {
   board = [...board];
-  console.log(board)
   var action_selected = this.chooseBestTransitionAfterstate(board)
   console.log(action_selected)
   return action_selected;
