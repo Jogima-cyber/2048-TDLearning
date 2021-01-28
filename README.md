@@ -39,5 +39,5 @@ When training is done, a file called "TDL2048_weights.zip" is created in the bui
 import torch
 weights = torch.load(file);
 ```
-## Other interesting work on the subject
+## Other interesting works on the subject
  - An pure Monte Carlo Tree Search (MCTS) AI solving 2048 (there is no learning, unlike in MCTS algorithms of DeepMind) : https://jupiter.xtrp.io/
