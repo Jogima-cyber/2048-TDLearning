@@ -10,9 +10,7 @@ Agent.prototype.select_move = function (board) {
 
 Agent.prototype.chooseBestTransitionAfterstate = function(state){
     var possible_actions = this.possible_moves(state);
-  
-    console.log(possible_actions)
-    
+      
     var best_action;
     var best_value = Number.NEGATIVE_INFINITY;
     
