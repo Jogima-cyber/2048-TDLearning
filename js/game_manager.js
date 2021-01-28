@@ -24,7 +24,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   var that = this;
   slider.oninput = function() {
     console.log("input")
-    console.log(parseInt(this.value))
+    console.log("debug 1:', this.value)
     that.speed = parseInt(this.value);
   }
   
