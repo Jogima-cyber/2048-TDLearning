@@ -7,7 +7,7 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.startTiles     = 2;
 
   $.ajax({
-    url: '../weights/TDL2048_weights..json',
+    url: '../weights/TDL2048_weights.json',
     async: false,
     dataType: 'json',
     success: function (response) {
