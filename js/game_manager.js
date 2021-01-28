@@ -16,7 +16,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   this.setup();
   
   while(!this.isGameTerminated()){
-    this.move(this.agent.select_move(this.grid.serialize()))
+    this.move(this.agent.select_move(this.grid.serialize().cells))
     this.sleep(5000)
   }
 }
