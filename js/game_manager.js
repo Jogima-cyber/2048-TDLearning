@@ -1,20 +1,10 @@
-function GameManager(size, InputManager, Actuator, StorageManager) {
+function GameManager(size, InputManager, Actuator, StorageManager, weights) {
   this.size           = size; // Size of the grid
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
 
   this.startTiles     = 2;
-
-  $.ajax({
-    url: './weights/TDL2048_weights.json',
-    async: false,
-    dataType: 'json',
-    success: function (response) {
-      // do stuff with response.
-      console.log(response)
-    }
-  });
   
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
