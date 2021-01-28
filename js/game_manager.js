@@ -49,6 +49,7 @@ async function start_agent(game_manager){
     }
     
     game_manager.move(action_selected)
+    console.log(game_manager.get_speed())
     await sleep(game_manager.get_speed());
   }
 }
