@@ -17,16 +17,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   
   while(!this.isGameTerminated()){
     this.move(this.agent.select_move(this.grid.serialize().cells))
-    this.sleep(5000)
   }
-}
-
-GameManager.prototype.sleep = function (milliseconds) {
-  const date = Date.now();
-  let currentDate = null;
-  do {
-    currentDate = Date.now();
-  } while (currentDate - date < milliseconds);
 }
 
 // Restart the game
