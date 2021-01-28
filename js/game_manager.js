@@ -9,11 +9,24 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   
   this.weights = weights;
   
-  this.inputManager.on("move", this.move.bind(this));
+  //this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
+  
+  while(not this.isGameTerminated()){
+    this.move(this.agent.select_move(this.gris.serialize()))
+    this.sleep(5000)
+  }
+}
+
+GameManager.prototype.sleep = function (milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
 }
 
 // Restart the game
