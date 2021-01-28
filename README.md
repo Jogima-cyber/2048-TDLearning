@@ -1,6 +1,7 @@
 # 2048-TDLearning
 ## Introduction
 Personal implementation in C++ of http://www.cs.put.poznan.pl/mszubert/pub/szubert2014cig.pdf. It's an algorithm that learns by itself to solve the 2048 game. It doesn't use deep learning (aka. neural networks). But it learns by itself using the Bellman equations.
+The authors of this paper already gave away an opensource implementation in java : https://github.com/mszubert/2048. Mines is ten times slower but goes directly to the point and thus I believe is more understandable.
 
 ## Installation
 To clone this project type in command line the following :
@@ -28,3 +29,13 @@ Go in command line to the build folder created during building and launch TDL204
 
 ## Issues
 I've followed the guidelines of https://pytorch.org/cppdocs/installing.html#minimal-example in order to install the torch dependency, and if you are on windows, maybe you need to change little things according to this tutorial.
+
+## Results
+So I was able to reproduce the results of the paper, my training time was about 12 hours, when training time of paper was around 3 hours. So there is need for optimization. If you have ideas, don't hesitate to share them with me in the issues/comments.
+
+## Load weights in python
+When training is done, a file called "TDL2048_weights.zip" is created in the build folder. It countains the trained weights in a format readable by torch in python. If you wish to read them in Python, just use :
+```
+import torch
+weights = torch.load(file);
+```
