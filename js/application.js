@@ -4,7 +4,7 @@ window.requestAnimationFrame(function () {
     url: './weights/TDL2048_weights.json',
     async: false,
     dataType: 'json',
-    success: function (response) {
+    success: function (weights) {
       // do stuff with response.
       new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager, Agent, weights);
     }
