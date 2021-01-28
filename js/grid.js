@@ -115,3 +115,15 @@ Grid.prototype.serialize = function () {
     cells: cellState
   };
 };
+
+Grid.prototype.serialize_for_agent = function () {
+  var cellState = [ [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0] ];
+
+  for (var x = 0; x < this.size; x++) {
+    for (var y = 0; y < this.size; y++) {
+      cellState[x][y] = this.cells[x][y].value;
+    }
+  }
+
+  return cellState;
+};
