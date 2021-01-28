@@ -6,7 +6,7 @@ window.requestAnimationFrame(function () {
     dataType: 'json',
     success: function (response) {
       // do stuff with response.
-      new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager, response);
+      new GameManager(4, KeyboardInputManager, HTMLActuator, LocalStorageManager, Agent, weights);
     }
   });
 });
