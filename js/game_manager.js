@@ -1,8 +1,8 @@
-async function sleep (ms) {
+function sleep (ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function GameManager(size, InputManager, Actuator, StorageManager, Agent, weights) {
+async function GameManager(size, InputManager, Actuator, StorageManager, Agent, weights) {
   this.size           = size; // Size of the grid
   this.agent          = new Agent(weights);
   this.inputManager   = new InputManager;
