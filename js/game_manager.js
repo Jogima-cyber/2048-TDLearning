@@ -6,6 +6,16 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
 
   this.startTiles     = 2;
 
+  $.ajax({
+    url: '../weights/TDL2048_weights..json',
+    async: false,
+    dataType: 'json',
+    success: function (response) {
+      // do stuff with response.
+      console.log(response)
+    }
+  });
+  
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
