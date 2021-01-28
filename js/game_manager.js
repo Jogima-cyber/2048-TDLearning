@@ -23,6 +23,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
 async function start_agent(game_manager){
   while(!game_manager.isGameTerminated()){
     game_manager.move(game_manager.agent.select_move(game_manager.grid.serialize_for_agent()))
+    console.log(game_manager.grid.serialize_for_agent())
     await sleep(5000);
   }
 }
