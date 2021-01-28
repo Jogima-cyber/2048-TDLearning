@@ -17,7 +17,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
 
   this.setup();
   
-  this.start_agent(this);
+  start_agent(this);
 }
 
 async function start_agent(game_manager){
