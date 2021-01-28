@@ -4,9 +4,61 @@ function Agent(weights) {
 
 Agent.prototype.select_move = function (board) {
   board = [...board];
-  
-  return Math.floor(Math.random()*4);
+  console.log(board)
+  return this.chooseBestTransitionAfterstate(board);
 };
+
+Agent.prototype.chooseBestTransitionAfterstate = function(state){
+    var possible_actions = possible_moves(state);
+    
+    var best_transition;
+    var reward_best = 0;
+    var best_value = Number.NEGATIVE_INFINITY;
+    
+    for(var i = 0;i<possible_actions.length;i++){
+        var action = possible_actions[i];
+        
+        var [after_state, reward] = this.move(state, action);
+        
+        var value = reward + this.vfunction(this.preprocess(after_state));
+        
+        if(value > best_value){
+            best_transition = after_state;
+            best_value = value;
+            reward_best = reward;
+        }
+    }
+    
+    return [best_transition, reward_best];
+}
+
+
+Agent.prototype.vfunction = function(state){
+  var batched_four_tuple_columns = 
+      this.weights[0][state[0][0]][state[0][1]][state[0][2]][state[0][3]] +
+      this.weights[1][state[1][0]][state[1][1]][state[1][2]][state[1][3]] +
+      this.weights[2][state[2][0]][state[2][1]][state[2][2]][state[2][3]] +
+      this.weights[3][state[3][0]][state[3][1]][state[3][2]][state[3][3]];
+    
+  var batched_four_tuple_rows =
+      this.weights[4][state[0][0]][state[1][0]][state[2][0]][state[3][0]] +
+      this.weights[5][state[0][1]][state[1][1]][state[2][1]][state[3][1]] +
+      this.weights[6][state[0][2]][state[1][2]][state[2][2]][state[3][2]] +
+      this.weights[7][state[0][3]][state[1][3]][state[2][3]][state[3][3]];
+    
+  var batched_four_tuple_receipts =
+      this.weights[8][state[0][0]][state[0][1]][state[1][1]][state[1][0]] +
+      this.weights[9][state[0][1]][state[0][2]][state[1][2]][state[1][1]] +
+      this.weights[10][state[0][2]][state[0][3]][state[1][3]][state[1][2]] +
+      this.weights[11][state[1][0]][state[1][1]][state[2][1]][state[2][0]] +
+      this.weights[12][state[1][1]][state[1][2]][state[2][2]][state[2][1]] +
+      this.weights[13][state[1][2]][state[1][3]][state[2][3]][state[2][2]] +
+      this.weights[14][state[2][0]][state[2][1]][state[3][1]][state[3][0]] +
+      this.weights[15][state[2][1]][state[2][2]][state[3][2]][state[3][1]] +
+      this.weights[16][state[2][2]][state[2][3]][state[3][3]][state[3][2]];
+    
+    return batched_four_tuple_columns + batched_four_tuple_rows + batched_four_tuple_receipts;
+}
 
 Agent.prototype.all = function(state){
   for (var i=0;i<4;i++){ 
@@ -19,7 +71,7 @@ Agent.prototype.all = function(state){
   return true;
 }
 
-Agent.prototype.preprocess(state){
+Agent.prototype.preprocess = function(state){
     state = [...state]
     for(var i=0;i<4;i++){
         for(var j=0;j<4;j++){
@@ -30,7 +82,7 @@ Agent.prototype.preprocess(state){
     return state;
 }
 
-Agent.prototype.left_rotation(state){
+Agent.prototype.left_rotation = function(state){
     var new_state = [ [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0] ];
     
     for(var i=0;i<4;i++){
@@ -41,16 +93,16 @@ Agent.prototype.left_rotation(state){
     return new_state;
 }
 
-Agent.prototype.rot90(state, k){
+Agent.prototype.rot90 = function(state, k){
     var k = k % 4;
     for(var i=0;i<k;i++){
-        state = left_rotation(state);
+        state = this.left_rotation(state);
     }
     
     return state;
 }
 
-Agent.prototype._slide_left_and_merge(state){
+Agent.prototype._slide_left_and_merge = function(state){
     //Slide tiles on a grid to the left and merge.
     var score = 0;
     
@@ -92,34 +144,28 @@ Agent.prototype._slide_left_and_merge(state){
     return [score, result];
 }
 
-Agent.prototype._move_left_possible(state){
+Agent.prototype._move_left_possible = function(state){
     //Slide tiles on a grid to the left and merge.    
-    std::vector< std::vector<int> >::const_iterator row; 
-    std::vector<int>::const_iterator col; 
-    for (row = state.begin(); row != state.end(); ++row){
-        std::vector<int> new_row = {0, 0, 0, 0};
-        int counter__ = 0;
-        int j = 0;
-        for (col = row->begin(); col != row->end(); ++col){ 
-            if(*col != 0){
-                new_row[counter__] = *col;
-                counter__++;
+    for (var i=0;i<4;i++){
+        var new_row = [0, 0, 0, 0];
+        var counter__ = 0;
+        for (var j=0;j<4;j++){
+            if(state[i][j] != 0){
+                new_row[counter__] = state[i][j];
+                counter__ += 1;
             }
             
-            if(new_row[j] != *col){
+            if(new_row[j] != state[i][j]){
                 return true;
             }
-            
-            j++;
         }
         
         j = 1;
         for(;j<counter__;j++){
-            int prev_el = new_row[j-1];
-            int el = new_row[j];
+            var prev_el = new_row[j-1];
+            var el = new_row[j];
             if(prev_el == el){
                 return true;
-                j++;
             }
         }
     }
@@ -127,25 +173,24 @@ Agent.prototype._move_left_possible(state){
     return false;
 }
 
-Agent.prototype.move(state, action){
+Agent.prototype.move = function(state, action){
     //Rotate board aligned with left action   
     //Align board action with left action
-    state = rot90(state, action);
+    state = this.rot90(state, action);
     
-    int reward;
-    std::tie(reward, state) = _slide_left_and_merge(state);
+    var [reward, state] = this._slide_left_and_merge(state);
         
-    state = rot90(state, 4-action);
+    state = this.rot90(state, 4-action);
     
-    return std::make_tuple(state, reward);
+    return [state, reward];
 }
 
-Agent.prototype.possible_moves(state){
-    std::vector<int> avalaible_actions;
+Agent.prototype.possible_moves = function(state){
+    var avalaible_actions = [];
     
     for(int i=0;i<4;i++){
-        if(_move_left_possible(rot90(state,i))){
-            avalaible_actions.push_back(i);
+        if(this._move_left_possible(this.rot90(state,i))){
+            avalaible_actions.push(i);
         }
     }
         
