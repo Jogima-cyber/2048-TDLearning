@@ -121,7 +121,9 @@ Grid.prototype.serialize_for_agent = function () {
 
   for (var x = 0; x < this.size; x++) {
     for (var y = 0; y < this.size; y++) {
-      cellState[this.size-1-x][this.size-1-y] = this.cells[x][y] ? this.cells[x][y].value : 0;
+      if(this.cells[x][y]){
+        cellState[this.cells[x][y].x][this.cells[x][y].y] = this.cells[x][y].value;
+      }
     }
   }
 
