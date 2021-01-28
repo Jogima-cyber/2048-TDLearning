@@ -25,7 +25,7 @@ async function start_agent(game_manager){
     var action_selected = game_manager.agent.select_move(game_manager.grid.serialize_for_agent());
     game_manager.move((3+action_selected)%4)
     console.log(game_manager.grid.serialize_for_agent())
-    await sleep(5000);
+    await sleep(500);
   }
 }
 
