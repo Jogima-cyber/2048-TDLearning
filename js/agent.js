@@ -9,7 +9,7 @@ Agent.prototype.select_move = function (board) {
 };
 
 Agent.prototype.chooseBestTransitionAfterstate = function(state){
-    var possible_actions = possible_moves(state);
+    var possible_actions = this.possible_moves(state);
     
     var best_transition;
     var reward_best = 0;
