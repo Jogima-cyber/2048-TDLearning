@@ -55,7 +55,7 @@ async function start_agent(game_manager){
 }
 
 GameManager.prototype.get_speed = function () {
-  return 5000 - this.speed*50;
+  return 1000 - this.speed*10;
 }
 
 // Restart the game
