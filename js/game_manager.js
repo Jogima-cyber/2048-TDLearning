@@ -8,7 +8,6 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
-  this.speed          = 0;
   
   this.startTiles     = 2;
     
@@ -19,6 +18,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   this.setup();
   
   var slider = document.getElementById("speedSlider");
+  this.speed = slider.value;
   var that = this;
   slider.oninput = function() {
     that.speed = this.value;
