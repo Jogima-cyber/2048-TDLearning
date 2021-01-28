@@ -2,7 +2,7 @@ function sleep (ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function GameManager(size, InputManager, Actuator, StorageManager, Agent, weights) {
+function GameManager(size, InputManager, Actuator, StorageManager, Agent, weights) {
   this.size           = size; // Size of the grid
   this.agent          = new Agent(weights);
   this.inputManager   = new InputManager;
@@ -10,15 +10,17 @@ async function GameManager(size, InputManager, Actuator, StorageManager, Agent, 
   this.actuator       = new Actuator;
   
   this.startTiles     = 2;
-  
-  this.weights = weights;
-  
+    
   //this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
   
+  this.start_agent();
+}
+
+async GameManager.prototype.start_agent(){
   while(!this.isGameTerminated()){
     this.move(this.agent.select_move(this.grid.serialize().cells))
     await sleep(2000);
