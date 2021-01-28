@@ -34,11 +34,11 @@ async function start_agent(game_manager){
     if(action_selected == 0){
       action_selected = 3;
     } else if(action_selected == 1){
-      action_selected = 0;
+      action_selected = 2;
     } else if(action_selected == 2){
       action_selected = 1;
     } else if(action_selected == 3){
-      action_selected = 2;
+      action_selected = 0;
     }
     
     game_manager.move(action_selected)
