@@ -13,8 +13,7 @@ Agent.prototype.select_move = function (board) {
 Agent.prototype.chooseBestTransitionAfterstate = function(state){
     var possible_actions = this.possible_moves(state);
     
-    var best_transition;
-    var reward_best = 0;
+    var best_action;
     var best_value = Number.NEGATIVE_INFINITY;
     
     for(var i = 0;i<possible_actions.length;i++){
@@ -25,13 +24,12 @@ Agent.prototype.chooseBestTransitionAfterstate = function(state){
         var value = reward + this.vfunction(this.preprocess(after_state));
         
         if(value > best_value){
-            best_transition = after_state;
             best_value = value;
-            reward_best = reward;
+            best_action = action;
         }
     }
     
-    return [best_transition, reward_best];
+    return best_action;
 }
 
 
