@@ -188,7 +188,7 @@ Agent.prototype.move = function(state, action){
 Agent.prototype.possible_moves = function(state){
     var avalaible_actions = [];
     
-    for(int i=0;i<4;i++){
+    for(var i=0;i<4;i++){
         if(this._move_left_possible(this.rot90(state,i))){
             avalaible_actions.push(i);
         }
