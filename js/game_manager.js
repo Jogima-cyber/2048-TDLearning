@@ -17,12 +17,12 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
 
   this.setup();
   
-  this.start_agent();
+  this.start_agent(this);
 }
 
-async GameManager.prototype.start_agent(){
-  while(!this.isGameTerminated()){
-    this.move(this.agent.select_move(this.grid.serialize().cells))
+async function start_agent(game_manager){
+  while(!game_manager.isGameTerminated()){
+    game_manager.move(game_manager.agent.select_move(game_manager.grid.serialize().cells))
     await sleep(2000);
   }
 }
