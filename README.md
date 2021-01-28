@@ -40,4 +40,4 @@ import torch
 weights = torch.load(file);
 ```
 ## Other interesting work on the subject
- - An Monte Carlo Tree Search AI solving 2048 (there is no learning, unlike in MCTS algorithms of DeepMind) : https://jupiter.xtrp.io/
+ - An pure Monte Carlo Tree Search (MCTS) AI solving 2048 (there is no learning, unlike in MCTS algorithms of DeepMind) : https://jupiter.xtrp.io/
