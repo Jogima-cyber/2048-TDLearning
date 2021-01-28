@@ -6,6 +6,9 @@ function GameManager(size, InputManager, Actuator, StorageManager, weights) {
 
   this.startTiles     = 2;
   
+  console.log("updated")
+  console.log(weights)
+  
   this.inputManager.on("move", this.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
