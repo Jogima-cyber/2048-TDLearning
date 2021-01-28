@@ -122,7 +122,7 @@ Grid.prototype.serialize_for_agent = function () {
   for (var x = 0; x < this.size; x++) {
     for (var y = 0; y < this.size; y++) {
       if(this.cells[x][y]){
-        cellState[this.cells[x][y].x][this.cells[x][y].y] = this.cells[x][y].value;
+        cellState[this.size - 1 - this.cells[x][y].x][this.size - 1 - this.cells[x][y].y] = this.cells[x][y].value;
       }
     }
   }
