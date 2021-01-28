@@ -1,9 +1,10 @@
-function GameManager(size, InputManager, Actuator, StorageManager, weights) {
+function GameManager(size, InputManager, Actuator, StorageManager, Agent, weights) {
   this.size           = size; // Size of the grid
+  this.agent          = new Agent(weights);
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
-
+  
   this.startTiles     = 2;
   
   this.weights = weights;
