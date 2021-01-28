@@ -20,10 +20,28 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   start_agent(this);
 }
 
+var map = {
+    0: { x: 0,  y: -1 }, // Up
+    1: { x: 1,  y: 0 },  // Right
+    2: { x: 0,  y: 1 },  // Down
+    3: { x: -1, y: 0 }   // Left
+  };
+
 async function start_agent(game_manager){
   while(!game_manager.isGameTerminated()){
     var action_selected = game_manager.agent.select_move(game_manager.grid.serialize_for_agent());
-    game_manager.move((3+action_selected)%4)
+    
+    if(action_selected == 0){
+      action_selected = 3;
+    } else if(action_selected == 1){
+      action_selected = 0;
+    } else if(action_selected == 2){
+      action_selected = 1;
+    } else if(action_selected == 3){
+      action_selected = 2;
+    }
+    
+    game_manager.move(action_selected)
     console.log(game_manager.grid.serialize_for_agent())
     await sleep(500);
   }
