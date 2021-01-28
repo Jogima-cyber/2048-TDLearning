@@ -8,6 +8,7 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   this.inputManager   = new InputManager;
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
+  this.speed          = 0;
   
   this.startTiles     = 2;
     
@@ -16,6 +17,12 @@ function GameManager(size, InputManager, Actuator, StorageManager, Agent, weight
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 
   this.setup();
+  
+  var slider = document.getElementById("speedSlider");
+  var that = this;
+  slider.oninput = function() {
+    that.speed = this.value;
+  }
   
   start_agent(this);
 }
@@ -43,8 +50,12 @@ async function start_agent(game_manager){
     
     game_manager.move(action_selected)
     console.log(game_manager.grid.serialize_for_agent())
-    await sleep(10);
+    await sleep(game_manager.get_speed());
   }
+}
+
+GameManager.prototype.get_speed = function () {
+  return 5000 - self.speed*50;
 }
 
 // Restart the game
